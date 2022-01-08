@@ -5,17 +5,36 @@ const dateFormat = require('../utils/dateFormat');
 const thoughtSchema = new Schema(
   {
     // TODO: add thoughtText
-
+    thoughtText: {
+      type: String,
+      maxLength: 255,
+      required: "Thought Text is required"
+    },
     // TODO: add createdAt
-
-    // TODO: add username
-
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      get: timestamp => {
+        dateFormat(timestamp)
+      } 
+    },
+    // TODO: add usernam
+      username: {
+        type: String,
+        required: true
+      },
     // TODO: add reactions
-
+      reactions: [
+        reactionSchema
+      ]
   },
   {
     // TODO: Add toJSON option
-  }
+    toJSON: {
+      getters: true
+    },
+    id: false
+  } 
 );
 
 thoughtSchema.virtual('reactionCount').get(function() {
