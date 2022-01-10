@@ -5,6 +5,7 @@ const userController = {
   getUsers(req, res) {
     User.find()
       .select('-__v')
+      .sort({_id: -1 })
       .then((dbUserData) => {
         res.json(dbUserData);
       })

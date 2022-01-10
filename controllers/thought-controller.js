@@ -40,10 +40,10 @@ const thoughtController = {
       .then((dbThoughtData) => {
         return User.findOneAndUpdate(
           {
-            _id: req.body.userId
+            _id: req.body.userID
           },
           {
-            $push: {
+            $addToSet: {
               thoughts: dbThoughtData._id
             }
           },

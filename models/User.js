@@ -12,9 +12,9 @@ const userSchema = new Schema(
     // TODO: create email field
     email: {
       type: String,
-      required: "Email is required",
+      required: true,
       unique: true,
-      match: /^([a-zA-Z\d_\.-]+)@([\da-zA-Z\.-]+)\\\.([a-z\.]{2,6})$/
+      match: [/.+@.+\..+/]
     },
     
     thoughts: [

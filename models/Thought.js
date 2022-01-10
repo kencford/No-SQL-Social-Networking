@@ -8,7 +8,7 @@ const thoughtSchema = new Schema(
     thoughtText: {
       type: String,
       maxLength: 255,
-      required: "Thought Text is required"
+      required: true
     },
     // TODO: add createdAt
     createdAt: {
