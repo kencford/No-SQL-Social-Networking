@@ -34,13 +34,14 @@ const thoughtController = {
   },
 
   // create a thought
+  // create a thought
   createThought(req, res) {
     // TODO: create a thought and add the thought to user's thoughts array
     Thought.create(req.body)
       .then((dbThoughtData) => {
         return User.findOneAndUpdate(
           {
-            _id: req.body.userID
+            _id: req.body.userId
           },
           {
             $addToSet: {
@@ -50,12 +51,18 @@ const thoughtController = {
           {
             new: true
           }
-      );
-  })
+        );
+      })
+      .then((userData)=>{
+        if (!userData) {
+          return res.status(404).json({ message: '404 no User Data Found' });
+        }
+        res.json(userData)
+      })
       .catch((err) => {
-    console.log(err);
-    res.status(500).json(err);
-  });
+        console.log(err);
+        res.status(500).json(err);
+      });
 },
 
   // update thought
